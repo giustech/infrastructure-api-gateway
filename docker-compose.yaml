@@ -1,0 +1,23 @@
+version: '3.7'
+services:
+  terraform:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_KEY}
+      AWS_REGION: "us-east-1"
+      TERRAFORM_BUCKET: ${AWS_BUCKET_TERRAFORM}
+      TERRAFORM_KEY: "poc/api-gateway-aws/terraform.tfstate"
+      TERRAFORM_BUCKET_REGION: "us-east-1"
+      TF_VAR_vpc_name: "devops-applications"
+      TF_VAR_api_name: "devops-api-test"
+      TF_VAR_account_number : ${AWS_ACCOUNT_NUMBER}
+    volumes:
+      - .:/files
+    working_dir:
+      /init
+    entrypoint: sh /files/entry-point.sh
+
+

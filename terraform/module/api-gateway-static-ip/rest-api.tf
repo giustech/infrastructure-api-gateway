@@ -28,13 +28,13 @@ resource "aws_api_gateway_rest_api_policy" "default" {
             "Effect": "Allow",
             "Principal": "*",
             "Action": "execute-api:Invoke",
-            "Resource": "arn:aws:execute-api:us-east-1:931670397156:*"
+            "Resource": "arn:aws:execute-api:${var.region}:${var.account_number}:*"
         },
         {
             "Effect": "Deny",
             "Principal": "*",
             "Action": "execute-api:Invoke",
-            "Resource": "arn:aws:execute-api:us-east-1:931670397156:*",
+            "Resource": "arn:aws:execute-api:${var.region}:${var.account_number}:*",
             "Condition": {
                 "StringNotEquals": {
                     "aws:SourceVpce": "${aws_vpc_endpoint.default.id}"
