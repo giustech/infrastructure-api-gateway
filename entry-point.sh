@@ -25,5 +25,8 @@ echo "TERRAFORM_BUCKET_REGION: $TERRAFORM_BUCKET_REGION"
 
 terraform init -backend-config="bucket=$TERRAFORM_BUCKET" -backend-config="key=$TERRAFORM_KEY" -backend-config="region=$TERRAFORM_BUCKET_REGION"
 terraform plan
-terraform apply -auto-approve
+#terraform apply -auto-approve
+
+
+
 #terraform destroy -auto-approve

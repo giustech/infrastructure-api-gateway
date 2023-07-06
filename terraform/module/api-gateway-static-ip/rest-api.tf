@@ -18,7 +18,10 @@ resource "aws_api_gateway_rest_api" "default" {
 }
 
 resource "aws_api_gateway_rest_api_policy" "default" {
-  depends_on = [aws_api_gateway_rest_api.default, aws_security_group.default]
+  depends_on = [
+    aws_api_gateway_rest_api.default,
+    aws_security_group.default
+  ]
   rest_api_id = aws_api_gateway_rest_api.default.id
   policy = <<EOF
 {
