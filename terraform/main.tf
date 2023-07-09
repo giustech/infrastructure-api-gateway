@@ -20,7 +20,7 @@ module "api-gateway" {
 }
 
 module "versions" {
-  source                      = "./module/api-gateway-resources"
+  source                      = "module/resource"
   rest_api_id                 = module.api-gateway.rest_api_id
   parent_id                   = module.api-gateway.rest_api_root_resource_id
   path                        = "version"
