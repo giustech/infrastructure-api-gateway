@@ -13,3 +13,10 @@ variable "api_name" {
 variable "account_number" {
   type = number
 }
+
+variable "certificate_arn" {
+  type = string
+}
+variable "domain" {
+  type = string
+}

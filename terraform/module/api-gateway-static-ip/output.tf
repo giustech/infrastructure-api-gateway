@@ -29,10 +29,10 @@ output "security_group_loadbalancer" {
   value = aws_security_group.default.id
 }
 
-output "endpoints_ips" {
-  value = data.dns_a_record_set.endpoint.addrs
-}
-
 output "body" {
   value = aws_api_gateway_rest_api.default.body
+}
+
+output "endpoints_ips" {
+  value = data.dns_a_record_set.endpoint.addrs
 }
