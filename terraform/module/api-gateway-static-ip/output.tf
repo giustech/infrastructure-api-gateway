@@ -36,3 +36,7 @@ output "body" {
 output "endpoints_ips" {
   value = data.dns_a_record_set.endpoint.addrs
 }
+
+#output "role" {
+#  value = ""
+#}

@@ -10,6 +10,8 @@ resource "aws_api_gateway_rest_api" "default" {
     ]
   }
 
+
+
   tags = {
     Name = var.api_name
     Provider = "terraform"
@@ -48,3 +50,4 @@ resource "aws_api_gateway_rest_api_policy" "default" {
 }
 EOF
 }
+

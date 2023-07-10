@@ -20,7 +20,7 @@ module "api-gateway" {
 }
 
 module "versions" {
-  source                      = "module/resource"
+  source                      = "./module/resource"
   rest_api_id                 = module.api-gateway.rest_api_id
   parent_id                   = module.api-gateway.rest_api_root_resource_id
   path                        = "version"
@@ -75,11 +75,12 @@ module "deploy" {
 }
 
 
-#
-#output "dns_global_accelerator" {
-#  value = module.loadbalancer.dns_global_accelerator
-#}
-#
-#output "dns_entry" {
-#  value = module.api-gateway.endpoints_ips
-#}
+
+output "api-gateway" {
+  value = {
+    dns_global_accelerator = module.loadbalancer.dns_global_accelerator
+    roles = {
+      cloudwatch = module.deploy.role-cloudwatch
+    }
+  }
+}
