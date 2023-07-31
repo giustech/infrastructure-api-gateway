@@ -18,42 +18,42 @@ module "api-gateway" {
   certificate_arn = "arn:aws:acm:${var.region}:${var.account_number}:certificate/${var.certificate}"
   domain          = var.domain
 }
-
-resource "aws_api_gateway_resource" "versionament" {
-  parent_id   = module.api-gateway.rest_api_root_resource_id
-  path_part   = "versionaments"
-  rest_api_id = module.api-gateway.rest_api_id
-}
-
-module "versionament_mock" {
-  source = "./module/resource"
-  http_method = "OPTIONS"
-  parent_id = module.api-gateway.rest_api_root_resource_id
-  path = "versionaments"
-  resource_id = aws_api_gateway_resource.versionament.id
-  rest_api_id = module.api-gateway.rest_api_id
-  integration = {
-    uri = ""
-    type = "MOCK"
-    request_parameters = {}
-    request_templates = {}
-  }
-  integration_response = {
-    integration_response_status_code = "200"
-    response_templates = {}
-    response_parameters = {}
-  }
-  method = {
-    authorization = "NONE"
-    authorizer_id = ""
-    request_method_api_key_required = false
-  }
-  method_response = {
-    status_code = "201"
-    response_models = {}
-    response_parameters = {}
-  }
-}
+#
+#resource "aws_api_gateway_resource" "versionament" {
+#  parent_id   = module.api-gateway.rest_api_root_resource_id
+#  path_part   = "versionaments"
+#  rest_api_id = module.api-gateway.rest_api_id
+#}
+#
+#module "versionament_mock" {
+#  source = "./module/resource"
+#  http_method = "OPTIONS"
+#  parent_id = module.api-gateway.rest_api_root_resource_id
+#  path = "versionaments"
+#  resource_id = aws_api_gateway_resource.versionament.id
+#  rest_api_id = module.api-gateway.rest_api_id
+#  integration = {
+#    uri = ""
+#    type = "MOCK"
+#    request_parameters = {}
+#    request_templates = {}
+#  }
+#  integration_response = {
+#    integration_response_status_code = "200"
+#    response_templates = {}
+#    response_parameters = {}
+#  }
+#  method = {
+#    authorization = "NONE"
+#    authorizer_id = ""
+#    request_method_api_key_required = false
+#  }
+#  method_response = {
+#    status_code = "201"
+#    response_models = {}
+#    response_parameters = {}
+#  }
+#}
 
 module "loadbalancer" {
   source              = "./module/loadbalancer"
@@ -70,7 +70,7 @@ module "loadbalancer" {
 
 
 module "deploy" {
-  depends_on = [module.api-gateway, module.loadbalancer, aws_api_gateway_resource.versionament]
+  depends_on = [module.api-gateway, module.loadbalancer]
   source          = "./module/deploy"
   rest_api_id     = module.api-gateway.rest_api_id
   domain          = var.domain
@@ -89,3 +89,12 @@ output "api-gateway" {
     }
   }
 }
+
+output "root_id" {
+  value = module.api-gateway.rest_api_root_resource_id
+}
+
+output "rest_api_id" {
+  value = module.api-gateway.rest_api_id
+}
+
