@@ -23,6 +23,7 @@ resource "aws_api_gateway_stage" "default" {
 }
 
 resource "aws_api_gateway_method_settings" "general_settings" {
+  depends_on = [aws_api_gateway_deployment.default, aws_api_gateway_deployment.deployment]
   rest_api_id = var.rest_api_id
   stage_name  = var.stage
   method_path = "*/*"

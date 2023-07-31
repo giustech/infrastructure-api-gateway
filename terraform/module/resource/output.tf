@@ -1,23 +1,16 @@
-output "resource_id" {
-  value = aws_api_gateway_resource.resource.id
+output "method" {
+    value = aws_api_gateway_method.default
 }
 
-output "aws_api_gateway_resource"  {
-  value = aws_api_gateway_resource.resource
+output "integration" {
+    value = aws_api_gateway_integration.default
 }
 
-output "aws_api_gateway_method" {
-  value = aws_api_gateway_method.methods
+output "method_response" {
+    value = aws_api_gateway_method_response.default
 }
 
-output "aws_api_gateway_integration" {
-  value = aws_api_gateway_integration.integrations
+output "integration_response" {
+    value = aws_api_gateway_integration_response.default
 }
 
-output "aws_api_gateway_integration_response" {
-  value = aws_api_gateway_integration_response.integrations_response
-}
-
-output "aws_api_gateway_method_response" {
-  value = aws_api_gateway_method_response.methods_response
-}
